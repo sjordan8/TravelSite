@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 medium-6 small-12 large-offset-3 medium-offset-3 cell">
+      <div class="callout primary large">
+        <form action="/new_trip/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 class="text-center">New Trip</h3>
+            {{ form.errors }}
+            <!-- <label for="name">Name</label>
+            <input id="name" type="text" name="name" value="{{ form.name }}">
+            <label for="description">Description</label>
+            <input id="description" type="text" name="description" value="{{ form.description }}"> -->
+            {{ form }}
+            <input type="submit" class="button expanded" value="Submit" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
