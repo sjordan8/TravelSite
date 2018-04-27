@@ -26,5 +26,5 @@ class RegistrationForm(UserCreationForm):
 class TripForm(forms.Form):
     name = forms.CharField(label='Name', max_length=40)
     description = forms.CharField(label='Description', widget=forms.Textarea)
-    start_date = forms.DateField(label='Date', widget=forms.SelectDateWidget)
-    end_date = forms.DateField(label='Date', widget=forms.SelectDateWidget)
+    start_date = forms.DateField(label='Start Date', widget=forms.SelectDateWidget)
+    end_date = forms.DateField(label='End Date', widget=forms.SelectDateWidget)
