@@ -55,3 +55,6 @@ def register(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

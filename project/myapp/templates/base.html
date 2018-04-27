@@ -22,7 +22,7 @@
       <div class="top-bar-right">
         <ul class="menu">
           {% if user.is_authenticated %}
-          <li><a href="#">Your Profile</a></li>
+          <li><a href="/profile/">Your Profile</a></li>
           <li><a href="/logout_view/" class="button expanded">Log Out</a></li>
           {% else %}
           <li><a href="/accounts/login" class="button expanded">Log In or Register</a></li>

@@ -1,18 +1,21 @@
 {% extends "base.html" %}
 
 {% block body %}
-
+<div class="top-bar" style="background-color:#d7ecfa">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" style="background-color:#d7ecfa" data-dropdown-menu>
+      <li class="menu-text" style="background-color:#d7ecfa">Available Trips</li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    {% if user.is_authenticated %}
+      <div><a href="/new_trip/" method="post" class="button expanded">Create a new trip</a></div>
+    {% endif %}
+  </div>
+</div>
+<div class="top-bar" style="background-color:#FFFFFF">
+</div>
 <div class="grid-container">
-    <div class="large-4 medium-6 small-12">
-      <div class="callout primary">
-        <h2 class="text-center">Available Trips</h2>
-      </div>
-      {% if user.is_authenticated %}
-      <div class="callout secondary">
-        <a href="/new_trip/" method="post" class="button expanded">Create a new trip</a>
-      </div>
-      {% endif %}
-    </div>
     <div class="grid-x grid-padding-x medium-up-3 small-up-2">
           {% for trip in trip_list %}
           <div class="cell">

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div class="large-12 medium-12 small-12">
+      <h1> Welcome{% if user.is_authenticated %}, {{ user.get_username }}.{% endif %} this is your profile page
+      where your information that we're selling to facebook is temporarily stored</h1>
+    </div>
+  </div>
+</div>
+{% endblock %}
