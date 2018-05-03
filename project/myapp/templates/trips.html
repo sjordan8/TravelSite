@@ -8,7 +8,7 @@
     </ul>
   </div>
   <div class="top-bar-right">
-    {% if user.is_authenticated %}
+    {% if perms.myapp.add_trip_model %}
       <div><a href="/new_trip/" method="post" class="button expanded">Create a new trip</a></div>
     {% endif %}
   </div>
@@ -24,6 +24,7 @@
               <div class="card-section">
                 <p>{{ trip.start_date }} - {{ trip.end_date }}</p>
                 <h4>{{ trip.description }}</h4>
+                <h6>Posted by: {{ trip.author }}</h6>
               </div>
             </div>
           </div>

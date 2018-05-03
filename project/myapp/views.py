@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 import django.contrib.auth.urls
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import logout
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from .forms import RegistrationForm, TripForm
 from .models import Trip_model
@@ -52,9 +52,25 @@ def register(request):
     context = {'form':form}
     return render(request,'registration/register.html',context)
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            return redirect('/login')
+    else:
+        form = AuthenticationForm()
+        context = {'form':form}
+        return render(request, 'registration/login.html', context)
+
 def logout_view(request):
     logout(request)
     return redirect('/')
+
 @login_required
 def profile(request):
     return render(request, 'profile.html')
