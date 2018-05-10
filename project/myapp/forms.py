@@ -10,7 +10,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "email",
+        fields = ("username", "first_name", "last_name", "email",
             "password1", "password2")
 
     def save(self, commit=True):
@@ -28,3 +28,10 @@ class TripForm(forms.Form):
     description = forms.CharField(label='Description', widget=forms.Textarea)
     start_date = forms.DateField(label='Start Date', widget=forms.SelectDateWidget)
     end_date = forms.DateField(label='End Date', widget=forms.SelectDateWidget)
+    image = forms.ImageField(label='Image')
+    image_description = forms.CharField(label='Description', max_length=40)
+
+class ProfileForm(forms.Form):
+    city = forms.CharField(label='City', max_length=40)
+    state = forms.CharField(label='State', max_length=40)
+    country = forms.CharField(label='Country', max_length=40)

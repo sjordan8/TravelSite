@@ -8,12 +8,15 @@
     </ul>
   </div>
 </div>
-<div class="top-bar" style="background-color:#FFFFFF">
-</div>
+<div class="top-bar" style="background-color:#FFFFFF"></div>
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="large-12">
-      <h1> Welcome{% if user.is_authenticated %}, {{ user.get_username }}{% endif %}</h1>
+    <div class="large-6 medium-12 small-12">
+      <h1> Welcome{% if user.is_authenticated %}, {{ user.first_name }}{% endif %}</h1>
+      <div class="callout primary large">
+        <h3> Travel Site is here to make traveling easier for travelers and travel agents alike. Create an account
+        to get started or head over to the "Available Trips" tab to check out what sort of trips we have to offer</h3>
+      </div>
     </div>
   </div>
 </div>

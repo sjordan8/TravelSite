@@ -11,18 +11,18 @@
     <link rel="stylesheet" href="{% static "css/app.css" %}">
   </head>
   <body>
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text">Travel Website</li>
-          <li><a href="/">Home</a></li>
-          <li><a href="/trips/">Available Trips</a></li>
+    <div class="top-bar" style="color:#FFFFFF; background-color:#000000">
+      <div class="top-bar-left" style="color:#FFFFFF; background-color:#000000">
+        <ul class="dropdown menu" data-dropdown-menu style="color:#FFFFFF; background-color:#000000">
+          <li class="menu-text" style="color:#FFFFFF; background-color:#000000">Travel Website</li>
+          <li><a href="/" style="color:#FFFFFF; background-color:#000000">Home</a></li>
+          <li><a href="/trips/" style="color:#FFFFFF; background-color:#000000">Available Trips</a></li>
         </ul>
       </div>
-      <div class="top-bar-right">
-        <ul class="menu">
+      <div class="top-bar-right" style="color:#FFFFFF; background-color:#000000">
+        <ul class="menu" style="color:#FFFFFF; background-color:#000000">
           {% if user.is_authenticated %}
-          <li><a href="/profile/">Your Profile</a></li>
+          <li><a href="/profile/" style="color:#FFFFFF; background-color:#000000">Your Profile</a></li>
           <li><a href="/logout_view/" class="button expanded">Log Out</a></li>
           {% else %}
           <li><a href="/login/" class="button expanded">Log In or Register</a></li>

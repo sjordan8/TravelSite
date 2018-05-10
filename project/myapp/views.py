@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from .forms import RegistrationForm, TripForm
-from .models import Trip_model
+from .models import Trip, Profile
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
@@ -18,34 +18,44 @@ def index(request):
 
 @csrf_exempt
 def trips(request):
-    trip_list = Trip_model.objects.all()
+    trip_list = Trip.objects.all()
     context = {'trip_list':trip_list}
     return render(request, 'trips.html', context)
+
+# @login_required
+# def join_trip(request):
+#     request.trip
 
 @csrf_exempt
 def new_trip(request):
     if request.method == 'POST':
-        form = TripForm(request.POST)
+        form = TripForm(request.POST, request.FILES)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            description = form.cleaned_data['description']
-            start_date = form.cleaned_data['start_date']
-            end_date = form.cleaned_data['end_date']
-            t = Trip_model(name=name,description=description,start_date=start_date,end_date=end_date,author=request.user)
+            t = Trip(
+            name = form.cleaned_data['name'],
+            description = form.cleaned_data['description'],
+            start_date = form.cleaned_data['start_date'],
+            end_date = form.cleaned_data['end_date'],
+            author = request.user,
+            image = form.cleaned_data['image'],
+            image_description = form.cleaned_data['image_description'])
             t.save()
             return redirect('/trips/')
     else:
         form = TripForm()
         context = {'form':form}
         return render(request, 'new_trip.html', context)
-        # return Response(trip_dictionary)
 
 
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save(commit=True)
+            user = form.save(commit=True)
+            profile = Profile()
+            profile.user = user
+            profile.save()
+            login(request, user)
             return redirect('/')
     else:
         form = RegistrationForm()
@@ -73,4 +83,11 @@ def logout_view(request):
 
 @login_required
 def profile(request):
+    profiles = Profile.objects.all()
+    for i in profiles:
+        if i.user.id == request.user.id:
+            context = {'profile':i}
+            return render(request, 'profile.html', context)
+        else:
+            return render(request, 'profile.html')
     return render(request, 'profile.html')

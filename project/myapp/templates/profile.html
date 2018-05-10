@@ -1,11 +1,40 @@
 {% extends "base.html" %}
 
 {% block body %}
+<div class="top-bar" style="background-color:#d7ecfa">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" style="background-color:#d7ecfa" data-dropdown-menu>
+      <li class="menu-text" style="background-color:#d7ecfa">Profile</li>
+    </ul>
+  </div>
+</div>
+<div class="top-bar" style="background-color:#FFFFFF">
+</div>
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
     <div class="large-12 medium-12 small-12">
-      <h1> Welcome{% if user.is_authenticated %}, {{ user.get_username }}.{% endif %} this is your profile page
-      where your information that we're selling to facebook is temporarily stored</h1>
+      <div>
+      <h1> Welcome{% if user.is_authenticated %}, {{ user.first_name }}.{% endif %}</h1>
+      </div>
+      <div class="callout primary large">
+        <div class="callout secondary">
+          <h5>City: {{ profile.city }}</h5>
+          <div><a href="/profile" method="put" class="text-right">Edit</a></div>
+        </div>
+        <div class="callout secondary">
+          <h5>State: {{ profile.state }}</h5>
+          <div><a href="/profile" method="put" class="text-right">Edit</a></div>
+        </div>
+        <div class="callout secondary">
+          <h5 class="text left">Country: {{ profile.country }}</h5>
+          <div><a href="/profile" method="put" class="text-right">Edit</a></div>
+        </div>
+        <div class="callout secondary">
+          <h5>Trips total: {{ profile.trips_total }}</h5>
+        </div>
+        <div class="callout secondary">
+          <h5>Upcoming Trips: </h5>
+        </div>
     </div>
   </div>
 </div>
