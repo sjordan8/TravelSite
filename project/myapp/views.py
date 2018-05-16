@@ -14,7 +14,10 @@ import json
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    trip_list = Trip.objects.all()
+    trip = trip_list[0]
+    context = {'trip':trip}
+    return render(request, 'index.html', context)
 
 @csrf_exempt
 def trips(request):

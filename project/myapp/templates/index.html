@@ -18,6 +18,24 @@
         to get started or head over to the "Available Trips" tab to check out what sort of trips we have to offer</h3>
       </div>
     </div>
+    <div></div>
+    <div class="large-6 medium-12 small-12">
+      <div class="callout primary large">
+        <div><h3>Featured Trip</h3>
+        <div class="cell">
+          <div class="card">
+            <div class="card-divider">{{ trip.name }}</div>
+            <img src="{{ trip.image.url }}" alt="{{ trip.image_description }}" class="img-responsive img-rounded">
+            <div class="card-section">
+              <p>{{ trip_.start_date }} - {{ trip.end_date }}</p>
+              <h6>Posted by: {{ trip.author.first_name }}</h6>
+              <h6>Members going: {{ trip.num_people }}</h6>
+              <div><a id="{{ trip.id }}" href="/trips" method="put" class="button">More Info</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

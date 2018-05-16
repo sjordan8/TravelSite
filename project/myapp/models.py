@@ -12,6 +12,7 @@ class Trip(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(max_length = 150, upload_to='uploads/%Y/%M/%D')
     image_description = models.CharField(max_length=40)
+    num_people = models.IntegerField(default=0)
 
     def __str__(self):
             return self.name

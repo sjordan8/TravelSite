@@ -25,7 +25,8 @@
               <div class="card-section">
                 <p>{{ trip.start_date }} - {{ trip.end_date }}</p>
                 <h6>Posted by: {{ trip.author.first_name }}</h6>
-                <div><a href="/" method="get" class="button">Join Trip</a></div>
+                <h6>Members going: {{ trip.num_people }}</h6>
+                <div><a id="{{ trip.id }}" href="/trips" method="put" class="button">More Info</a></div>
               </div>
             </div>
           </div>
