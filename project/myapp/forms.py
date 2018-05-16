@@ -35,3 +35,4 @@ class ProfileForm(forms.Form):
     city = forms.CharField(label='City', max_length=40)
     state = forms.CharField(label='State', max_length=40)
     country = forms.CharField(label='Country', max_length=40)
+    email = forms.EmailField(label='Email')

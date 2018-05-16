@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="top-bar" style="background-color:#d7ecfa">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" style="background-color:#d7ecfa" data-dropdown-menu>
+      <li class="menu-text" style="background-color:#d7ecfa">Trip</li>
+    </ul>
+  </div>
+</div>
+<div class="top-bar" style="background-color:#FFFFFF"></div>
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 medium-8 small-10 large-offset-3 medium-offset-2 small-offset-1">
+      <div class="callout primary">
+        <div class="callout">
+        <h3 class="text-center">{{ trip.name }}</h3>
+      </div>
+        <img src="{{ trip.image.url }}" alt="{{ trip.image_description }}" class="img-responsive img-rounded">
+        <div class="callout">
+        <p>{{ trip.start_date }} - {{ trip.end_date }}</p>
+        <p> {{ trip.description }} </p>
+        <h6>Posted by: {{ trip.author.first_name }}</h6>
+        <h6>Members going: {{ trip.num_people }}</h6>
+      </div>
+      <div class="text-center"><a id="{{ trip.id }}" href="/join{{ trip.id }}" method="POST" class="button expanded">Join</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

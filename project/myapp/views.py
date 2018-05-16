@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from .forms import RegistrationForm, TripForm
+from .forms import RegistrationForm, TripForm, ProfileForm
 from .models import Trip, Profile
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -25,9 +25,29 @@ def trips(request):
     context = {'trip_list':trip_list}
     return render(request, 'trips.html', context)
 
-# @login_required
-# def join_trip(request):
-#     request.trip
+def more_info(request, id):
+    trip_list = Trip.objects.all()
+    for t in trip_list:
+        if id == t.id:
+            trip = t
+            context = {'trip':trip}
+            return render(request, 'tripnum.html', context)
+    return render(request, 'tripnum.html')
+
+@login_required
+def join_trip(request, id):
+    trip_list = Trip.objects.all()
+    for t in trip_list:
+        if id == t.id:
+            trip = t
+            profile = request.user.profile
+            profile.trips.add(trip)
+            profile.trips_total = profile.trips_total + 1
+            trip.num_people = trip.num_people + 1
+            profile.save()
+            trip.save()
+    context = {'trip_list':trip_list}
+    return render(request, 'trips.html', context)
 
 @csrf_exempt
 def new_trip(request):
@@ -86,11 +106,6 @@ def logout_view(request):
 
 @login_required
 def profile(request):
-    profiles = Profile.objects.all()
-    for i in profiles:
-        if i.user.id == request.user.id:
-            context = {'profile':i}
-            return render(request, 'profile.html', context)
-        else:
-            return render(request, 'profile.html')
-    return render(request, 'profile.html')
+    profile = request.user.profile
+    context = {'profile':profile}
+    return render(request, 'profile.html', context)

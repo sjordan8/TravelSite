@@ -18,16 +18,9 @@ class Trip(models.Model):
             return self.name
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     trips_total = models.IntegerField(default=0)
     trips = models.ManyToManyField(Trip)
-
-
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     city = models.CharField(max_length=100)
-#     state = models.CharField(max_length=100)
-#     country = models.CharField(max_length=100)

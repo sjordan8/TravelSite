@@ -12,28 +12,23 @@
 </div>
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="large-12 medium-12 small-12">
+    <div class="large-6 medium-8 small-10 large-offset-3 medium-offset-2 small-offset-1">
       <div>
-      <h1> Welcome{% if user.is_authenticated %}, {{ user.first_name }}.{% endif %}</h1>
+      <h1 class="text-center">Welcome{% if user.is_authenticated %} {{ user.first_name }}{% endif %}</h1>
       </div>
       <div class="callout primary large">
-        <div class="callout secondary">
-          <h5>City: {{ profile.city }}</h5>
-          <div><a href="/profile" method="put" class="text-right">Edit</a></div>
+        <div class="text-center"><h5>Personal Information</h5></div>
+        <div class="callout">
+          <div class="cell"><p>{{ user.first_name }} {{ user.last_name }}</p></div>
+          <div class="cell"><p>{{ profile.city }}</p></div>
+          <div class="cell"><p>{{ profile.state }}</p></div>
+          <div class="cell"><p>{{ profile.country }}</p></div>
+          <div class="cell"><p>{{ user.email }}</p></div>
         </div>
-        <div class="callout secondary">
-          <h5>State: {{ profile.state }}</h5>
-          <div><a href="/profile" method="put" class="text-right">Edit</a></div>
-        </div>
-        <div class="callout secondary">
-          <h5 class="text left">Country: {{ profile.country }}</h5>
-          <div><a href="/profile" method="put" class="text-right">Edit</a></div>
-        </div>
-        <div class="callout secondary">
-          <h5>Trips total: {{ profile.trips_total }}</h5>
-        </div>
-        <div class="callout secondary">
-          <h5>Upcoming Trips: </h5>
+        <div class="text-center"><h5>Trip Information</h5></div>
+        <div class="callout">
+          <div class="cell"><p>{{ profile.trips_total }} trips total</p></div>
+          <div class="cell"><p>Upcoming Trips: </p></div>
         </div>
     </div>
   </div>
