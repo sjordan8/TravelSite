@@ -8,6 +8,7 @@ from .forms import RegistrationForm, TripForm, ProfileForm
 from .models import Trip, Profile
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.safestring import mark_safe
 from datetime import datetime
 import json
 
@@ -36,7 +37,9 @@ def more_info(request, id):
         utrip = None
     if utrip != None:
         allow_join = False
-        context = {'trip':trip, 'allow_join':allow_join}
+        context = {'trip':trip,
+        'allow_join':allow_join,
+        'room_name_json':mark_safe(json.dumps(id))}
         return render(request, 'tripnum.html', context)
     return render(request, 'tripnum.html', context)
 
