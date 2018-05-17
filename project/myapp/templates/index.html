@@ -11,8 +11,7 @@
 <div class="top-bar" style="background-color:#FFFFFF"></div>
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="large-6 medium-12 small-12">
-      <div class="callout">
+    <div class="column large-5 medium-10 small-10 large-offset-1 medium-offset-1 small-offset-1">
         <h2 class="text-center"> Travel Site is here to make traveling easier for travelers and travel agents alike</h1>
         <p> The goal of this site for travel agents is to act as a hub for them to post trips and store
           relevant user information. As of right now the site includes a profile page which has your personal
@@ -24,16 +23,16 @@
         <p> Create an account to join a trip or get in contact with staff to be registered as a travel agent so you can start
           posting trips. If you just want to browse the site you're always welcome to head over to the "Available Trips" tab
           to check out what sort of trips we have to offer </p>
-    </div>
   </div>
-    <div class="large-6 medium-12 small-12">
-      <div class="callout"><h3>Featured Trip</h3></div>
+  <div class="column large-1 medium-12 small-12"></div>
+  <div class="column large-4 medium-12 small-12">
+      <div class="text-center"><h2>Featured Trip</h2></div>
         <div class="cell">
           <div class="card">
             <div class="card-divider">{{ trip.name }}</div>
             <img src="{{ trip.image.url }}" alt="{{ trip.image_description }}" class="img-responsive img-rounded">
             <div class="card-section">
-              <p>{{ trip_.start_date }} - {{ trip.end_date }}</p>
+              <p>{{ trip.start_date }} - {{ trip.end_date }}</p>
               <h6>Posted by: {{ trip.author.first_name }}</h6>
               <h6>Members going: {{ trip.num_people }}</h6>
               <a id="{{ trip.id }}" href="/trip_info{{ trip.id }}" method="GET" class="button">More Info</a>
@@ -41,5 +40,6 @@
           </div>
         </div>
   </div>
+</div>
 </div>
 {% endblock %}

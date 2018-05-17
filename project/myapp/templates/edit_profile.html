@@ -19,16 +19,17 @@
       <div class="callout primary large">
         <div class="text-center"><h5>Personal Information</h5></div>
         <div class="callout">
-          <div class="cell"><p>{{ user.first_name }} {{ user.last_name }}</p></div>
-          <div class="cell"><p>City: {{ profile.city }}</p></div>
-          <div class="cell"><p>State: {{ profile.state }}</p></div>
-          <div class="cell"><p>Country: {{ profile.country }}</p></div>
-          <div class="cell"><p>{{ user.email }}</p></div>
-          <div class="text-center"><a href="/profile/edit/" class="button">Edit</a>
+          <form method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <div class="text-center"><button class="button" type="submit">Save</button></div>
+          </form>
         </div>
         <div class="text-center"><h5>Trip Information</h5></div>
+        <div class="callout">
           <div class="cell"><p>{{ profile.trips_total }} trips total</p></div>
-          <div class="cell"><p>Upcoming Trips: {% for trip in trip_list %} {{ trip.name }} {% endfor %}</p></div>
+          <div class="cell"><p>Upcoming Trips: </p></div>
+        </div>
     </div>
   </div>
 </div>

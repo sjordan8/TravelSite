@@ -25,13 +25,14 @@ SECRET_KEY = 'j!blxva#c8(6h-_m_*zh!3@8ap07-t%fnws(y=1^fcmrd3x4cl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["35.196.1.218"]
+ALLOWED_HOSTS = ['localhost','35.196.1.218']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'myapp',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,6 +70,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'website.wsgi.application'
+
+ASGI_APPLICATION = 'website.routing.application'
 
 
 # Database
@@ -123,3 +126,12 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR + '/media'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
