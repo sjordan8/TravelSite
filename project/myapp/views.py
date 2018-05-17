@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import django.contrib.auth.urls
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from .forms import RegistrationForm, TripForm, ProfileForm
@@ -26,13 +26,19 @@ def trips(request):
     return render(request, 'trips.html', context)
 
 def more_info(request, id):
-    trip_list = Trip.objects.all()
-    for t in trip_list:
-        if id == t.id:
-            trip = t
-            context = {'trip':trip}
-            return render(request, 'tripnum.html', context)
-    return render(request, 'tripnum.html')
+    trip = Trip.objects.get(id=id)
+    user_trips = request.user.profile.trips.all()
+    allow_join = True
+    context = {'trip':trip, 'allow_join':allow_join}
+    try:
+        utrip = user_trips.get(id=id)
+    except Trip.DoesNotExist:
+        utrip = None
+    if utrip != None:
+        allow_join = False
+        context = {'trip':trip, 'allow_join':allow_join}
+        return render(request, 'tripnum.html', context)
+    return render(request, 'tripnum.html', context)
 
 @login_required
 def join_trip(request, id):
@@ -105,7 +111,28 @@ def logout_view(request):
     return redirect('/')
 
 @login_required
-def profile(request):
+def view_profile(request):
     profile = request.user.profile
-    context = {'profile':profile}
+    trip_list = profile.trips.all()
+    context = {'profile':profile, 'trip_list':trip_list}
     return render(request, 'profile.html', context)
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        profile = request.user.profile
+        if form.is_valid():
+            profile.city = form.cleaned_data['city']
+            profile.state = form.cleaned_data['state']
+            profile.country = form.cleaned_data['country']
+            profile.save()
+            return redirect('/profile/')
+    else:
+        profile = request.user.profile
+        data = {'city':profile.city,
+            'state':profile.state,
+            'country':profile.country}
+        form = ProfileForm(data)
+        context = {'form':form, 'profile':profile}
+        return render(request, 'edit_profile.html', context)

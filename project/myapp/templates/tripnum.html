@@ -23,7 +23,11 @@
         <h6>Posted by: {{ trip.author.first_name }}</h6>
         <h6>Members going: {{ trip.num_people }}</h6>
       </div>
-      <div class="text-center"><a id="{{ trip.id }}" href="/join{{ trip.id }}" method="POST" class="button expanded">Join</a></div>
+      {% if user.is_authenticated %}
+      {% if allow_join %}
+      <div class="text-center"><a href="/join{{ trip.id }}" method="POST" class="button expanded">Join</a></div>
+      {% endif %}
+      {% endif %}
       </div>
     </div>
   </div>

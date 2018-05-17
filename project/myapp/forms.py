@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 class RegistrationForm(UserCreationForm):
@@ -10,8 +10,12 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email",
-            "password1", "password2")
+        fields = ("username",
+            "first_name",
+            "last_name",
+            "email",
+            "password1",
+            "password2")
 
     def save(self, commit=True):
         user=super(RegistrationForm,self).save(commit=False)
@@ -35,4 +39,7 @@ class ProfileForm(forms.Form):
     city = forms.CharField(label='City', max_length=40)
     state = forms.CharField(label='State', max_length=40)
     country = forms.CharField(label='Country', max_length=40)
-    email = forms.EmailField(label='Email')
+
+
+
+    
