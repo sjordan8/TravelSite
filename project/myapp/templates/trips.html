@@ -26,7 +26,7 @@
                 <p>{{ trip.start_date }} - {{ trip.end_date }}</p>
                 <h6>Posted by: {{ trip.author.first_name }}</h6>
                 <h6>Members going: {{ trip.num_people }}</h6>
-                <a id="{{ trip.id }}" href="/trip_info{{ trip.id }}" method="GET" class="button">More Info</a>
+                <a id="{{ trip.id }}" {% if user.is_authenticated %}href="/trip_info{{ trip.id }}"{% else %}href="/login"{% endif %} method="GET" class="button">More Info</a>
               </div>
             </div>
           </div>

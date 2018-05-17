@@ -15,7 +15,9 @@
         <h2 class="text-center"> Travel Site is here to make traveling easier for travelers and travel agents alike</h1>
         <p> The goal of this site for travel agents is to act as a hub for them to post trips and store
           relevant user information. As of right now the site includes a profile page which has your personal
-          information and a trips page that has the current available trips.</p>
+          information and a trips page that has the current available trips. If you're interested in a trip you have to be
+	logged in to see the expanded content. If you choose to join a trip you're welcome to try out the chat room on that 
+	trips page.</p>
         <p>In the future I hope for this site to have full capabilities to handle payments from the users to the agents.
         Another future service I want to add to this site is the ability for the travel agent to coordinate
       flights of all of the trip members to get them to the destination on the same day at the same time. I would
@@ -35,7 +37,7 @@
               <p>{{ trip.start_date }} - {{ trip.end_date }}</p>
               <h6>Posted by: {{ trip.author.first_name }}</h6>
               <h6>Members going: {{ trip.num_people }}</h6>
-              <a id="{{ trip.id }}" href="/trip_info{{ trip.id }}" method="GET" class="button">More Info</a>
+	      <a id="{{ trip.id }}" {% if user.is_authenticated %}href="/trip_info{{ trip.id }}"{% else %}href="/login"{% endif %} method="GET" class="button">More Info</a>
             </div>
           </div>
         </div>
